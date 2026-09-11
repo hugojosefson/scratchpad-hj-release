@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   publish-tag-prepare:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hj-local-validation]
     timeout-minutes: 30
     permissions:
       contents: read
@@ -52,12 +52,12 @@ jobs:
           --allow-read=.,/tmp/opencode
           --allow-write=deno.json,deno.jsonc,CHANGELOG.md,/tmp/opencode,"${GITHUB_OUTPUT}","${GITHUB_STEP_SUMMARY}"
           --allow-run=deno,git
-          jsr:@hugojosefson/cli@0.0.0
+          file:///opt/hj/src/cli/cli.ts
           release publish-tag-prepare
   publish-tag-apply:
     needs: publish-tag-prepare
     if: needs.publish-tag-prepare.outputs.release-needed == 'true'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hj-local-validation]
     timeout-minutes: 30
     permissions:
       checks: write
@@ -87,5 +87,5 @@ jobs:
           --allow-read=.,/tmp/opencode
           --allow-write=deno.json,deno.jsonc,CHANGELOG.md,/tmp/opencode,"${GITHUB_STEP_SUMMARY}"
           --allow-run=deno,gh,git
-          jsr:@hugojosefson/cli@0.0.0
+          file:///opt/hj/src/cli/cli.ts
           release publish-tag-apply

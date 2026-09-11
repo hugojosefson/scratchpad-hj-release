@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hj-local-validation]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -19,7 +19,7 @@ jobs:
           deno-version: 2.9.6
       - run: deno task all
   hj-release-commit-validation:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hj-local-validation]
     permissions:
       contents: read
     steps:
@@ -39,5 +39,5 @@ jobs:
           deno run
           --allow-env=HJ_RELEASE_ROUTE,HJ_SOURCE_BASE_SHA,HJ_SOURCE_HEAD_SHA
           --allow-run=git
-          jsr:@hugojosefson/cli@0.0.0
+          file:///opt/hj/src/cli/cli.ts
           release publish-tag-prepare
