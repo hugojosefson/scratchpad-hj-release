@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.3
+
+- fix: preserve the competing source change
+- fix: preserve source updates during release preparation
+- fix: preserve the source tree across release collisions
+
 ## 0.0.2
 
 - fix: start source collision rehearsal
