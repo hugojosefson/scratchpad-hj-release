@@ -45,7 +45,7 @@
     },
     "publish-check": {
       "description": "Check JSR publication.",
-      "command": "deno publish --dry-run --check=all"
+      "command": "deno publish --dry-run --allow-dirty --check=all"
     }
   },
   "name": "@hugojosefson/scratchpad-hj-release",
