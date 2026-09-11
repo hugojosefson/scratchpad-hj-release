@@ -1,0 +1,53 @@
+{
+  "exports": {
+    ".": "./src/lib/mod.ts"
+  },
+  "tasks": {
+    "fmt": {
+      "description": "Fix formatting.",
+      "command": "deno fmt"
+    },
+    "format": {
+      "description": "Check formatting.",
+      "command": "deno fmt --check"
+    },
+    "check": {
+      "description": "Run project checks.",
+      "dependencies": [
+        "format",
+        "lint",
+        "typecheck",
+        "test",
+        "publish-check"
+      ]
+    },
+    "default": {
+      "description": "Fix formatting, then run checks.",
+      "command": "deno fmt && deno task check"
+    },
+    "all": {
+      "description": "Run all checks.",
+      "dependencies": [
+        "check"
+      ]
+    },
+    "lint": {
+      "description": "Fix lint locally; check lint in CI.",
+      "command": "sh -c 'if test -n \"${CI:-}\"; then exec deno lint; else exec deno lint --fix; fi'"
+    },
+    "typecheck": {
+      "description": "Type-check the project.",
+      "command": "deno check"
+    },
+    "test": {
+      "description": "Run tests.",
+      "command": "deno test --parallel --trace-leaks"
+    },
+    "publish-check": {
+      "description": "Check JSR publication.",
+      "command": "deno publish --dry-run --check=all"
+    }
+  },
+  "name": "@hugojosefson/scratchpad-hj-release",
+  "version": "0.0.0"
+}
