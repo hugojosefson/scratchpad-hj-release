@@ -3,3 +3,5 @@
 ## License
 
 [MIT](./LICENSE)
+
+Collision rehearsal.
